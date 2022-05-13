@@ -1,0 +1,7 @@
+Manually create "MOFAD_SAGE" and "MOFAD_DEBT" accounts via php my admin with "account_type" 
+as "MAIN" and account Owner as "0"
+
+anually create satate  accounts via php my admin with "account_type" 
+as "STATE_LUBRICANT_SALES" and account Owner as state id. This feature is to be later automated with state creation
+
+Use order type "STOCK_TTRANSFER" for "W2W" transfers 

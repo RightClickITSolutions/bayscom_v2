@@ -1,0 +1,22 @@
+/*================================================================================
+	Item Name: Materialize - Material Design Admin Template
+	Version: 5.0
+	Author: PIXINVENT
+	Author URL: https://themeforest.net/user/pixinvent/portfolio
+================================================================================
+
+NOTE:
+------
+PLACE HERE YOUR OWN CSS CODES AND IF NEEDED, OVERRIDE THE STYLES FROM THE OTHER STYLESHEETS.
+WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BETTER LIKE THIS.  */
+
+
+/*
+  Gradient color mixin
+*/
+.gradient-45deg-yellow-red {
+	background: #b3e5fc;
+	background: -webkit-linear-gradient(45deg, #9d0707, #fd9a32) !important;
+	background: linear-gradient(45deg, #9d0707, #fd9a32) !important;
+  }
+  

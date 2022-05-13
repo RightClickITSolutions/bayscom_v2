@@ -1,0 +1,6 @@
+Database: mofadene_mofad
+
+user:
+
+username: mofadene_app
+password: 8bZ*dxZ5,]@E
