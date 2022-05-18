@@ -201,6 +201,7 @@ Route::group(['middleware' => ['auth']], function() {
     // Sage Account
 
     Route::any('accounts/sage-account/debit-credit', 'AccountsController@sageAccountDC');
+    Route::any('accounts/sage-account/sage-account', 'AccountsController@testSageAccount');
 
 
 });
