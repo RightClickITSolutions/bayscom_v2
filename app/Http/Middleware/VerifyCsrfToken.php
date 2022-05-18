@@ -24,5 +24,6 @@ class VerifyCsrfToken extends Middleware
         '/station/delete/inst-delete/',
         '/lubebay/delete/inst-delete/',
         '/pro/reverse_pro/delete/inst-delete/',
+        '/admin/users/delete-user/inst-delete/',
     ];
 }

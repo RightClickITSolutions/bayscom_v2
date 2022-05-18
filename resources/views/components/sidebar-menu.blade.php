@@ -84,6 +84,10 @@ class="sidenav-main nav-expanded nav-lock nav-collapsible sidenav-dark side-nav-
                                 data-i18n="Second level">View/Approve PRF</span></a>
                     </li>
 
+                    <li><a href="{{ url('approved/view-prf') }}"><i class="material-icons">radio_button_unchecked</i><span
+                                data-i18n="Second level">View Approved PRF</span></a>
+                    </li>
+
 
                     @can('create_prf')
                     @endcan
@@ -100,6 +104,52 @@ class="sidenav-main nav-expanded nav-lock nav-collapsible sidenav-dark side-nav-
                                 class="material-icons">radio_button_unchecked</i><span
                                 data-i18n="Second level">Sales report</span></a>
                     </li>
+
+
+                </ul>
+            </div>
+        </li>
+    @endcan
+
+
+    {{-- Lodgement --}}
+
+    <!-- PRF -->
+    @can('view_prf')
+        <li class="bold"><a class="collapsible-header waves-effect waves-cyan "
+                href="JavaScript:void(0)"><i class="material-icons">fast_forward</i><span class="menu-title"
+                    data-i18n="Menu levels">Lodgements</span></a>
+            <div class="collapsible-body">
+                <ul class="collapsible collapsible-sub" data-collapsible="accordion">
+                    @can('create_prf')
+
+                        <li><a href="{{ url('customer/lodgement/confirm') }}"><i
+                                    class="material-icons">radio_button_unchecked</i><span
+                                    data-i18n="Second level">View/Confirm</span></a>
+                        </li>
+
+                        <li><a href="{{ url('customer/lodgement/confirmation') }}"><i
+                                    class="material-icons">radio_button_unchecked</i><span
+                                    data-i18n="Second level">View Lodgements</span></a>
+                        </li>
+                         <li><a href="{{ url('/lodgements/create') }}"><i class="material-icons">radio_button_unchecked</i><span
+                                data-i18n="Second level">Create Lodgements</span></a>
+                        </li>
+                    @endcan
+                    {{-- <li><a href="{{ url('customer/lodgement/confirmation') }}"><i
+                                class="material-icons">radio_button_unchecked</i><span
+                                data-i18n="Second level">View Confirmed Lodgements</span></a>
+                    </li> --}}
+
+
+                    @can('create_prf')
+                    @endcan
+                    <!-- <li><a href="{{ url('/lodgements/view') }}"><i class="material-icons">radio_button_unchecked</i><span data-i18n="Second level">Customer Payment</span></a>
+                    </li> 
+                    <li><a href="{{ url('customer/lodgement/confirmation') }}"><i class="material-icons">radio_button_unchecked</i><span data-i18n="Second level" class=" text-wrap" >Confirm Lodgements</span></a>
+                    </li>
+                    -->
+
 
 
                 </ul>
@@ -274,27 +324,6 @@ class="sidenav-main nav-expanded nav-lock nav-collapsible sidenav-dark side-nav-
                     <li><a href="{{ url('/lubebay/lodgement') }}"><i
                                 class="material-icons">radio_button_unchecked</i><span
                                 data-i18n="Second level">Lodgement</span></a>
-                    </li>
-                    <hr>
-                    @can('post_lubebay_sales')
-                        <li><a href="{{ url('/lubebay/substore/days-transactions/submit') }}"><i
-                                    class="material-icons">radio_button_unchecked</i><span
-                                    data-i18n="Second level">Lubricant Sales</span></a>
-                        </li>
-
-                    @endcan
-                    <li><a href="{{ url('/lubebay/substore/days-transactions/view') }}"><i
-                                class="material-icons">radio_button_unchecked</i><span data-i18n="Second level"
-                                class=" text-wrap">Confirm Lubricant Sale</span></a>
-                    </li>
-
-                    <li><a href="{{ url('/lubebay/substore/lodgement') }}"><i
-                                class="material-icons">radio_button_unchecked</i><span
-                                data-i18n="Second level">Lubricant Lodgements</span></a>
-                    </li>
-                    <li><a href="{{ url('/substore/inventory') }}"><i
-                                class="material-icons">radio_button_unchecked</i><span
-                                data-i18n="Second level">Inventory</span></a>
                     </li>
                 </ul>
             </div>

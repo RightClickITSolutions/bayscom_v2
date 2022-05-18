@@ -1,8 +1,5 @@
 @extends('layouts.mofad')
-
-@section('head')
-    @parent()
-    
+@section('head') 
    <!-- BEGIN: VENDOR CSS-->
    <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/vendors.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/flag-icon/css/flag-icon.min.css')}}">
@@ -10,36 +7,53 @@
     <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/data-tables/extensions/responsive/css/responsive.dataTables.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/data-tables/css/select.dataTables.min.css')}}">
     <!-- END: VENDOR CSS-->
+    @parent()
+   
 @endsection()
 
-@section('side_nav')
-@parent()
-@endsection
-
-@section('top_nav')
-    @parent()
-@endsection
-
-@section('content')
-<div class="col s12">
+      @section('side_nav')
+        @parent()
+      @endsection
+      @section('top_nav')
+            @parent()
+      @endsection
+      <!-- End Navbar -->
+      @section('content')
+      @include('includes.post_status')
+      <div class="col s12">
                 <div class="container">
                     <div class="section section-data-tables">
                         <div class="card">
                             <div class="card-content">
-                                <p class="caption mb-0">List Of System Users customers</p>
+                                <p class="caption mb-0">List Of all customers</p>
                             </div>
-                            @if (session()->has('status'))
-                                <div class="alert alert-success">
-                                    {{  session('status') }}
-                                </div>
-                            @endif
                         </div>
                         <!-- DataTables example -->
                         <div class="row">
                             <div class="col s12 m12 l12">
+                               @if (session()->has('status'))
+                                  <script type="application/javascript">
+                                      Swal.fire({
+                                          icon: 'success',
+                                          // title: 'Oops...',
+                                          text: 'Lodgement Reverse successfully.',
+                                          // footer: '<a href="">Why do I have this issue?</a>'
+                                      })
+                                  </script>
+                              @endif
+                               @if (session()->has('status_error'))
+                                    <script type="application/javascript">
+                                        Swal.fire({
+                                            icon: 'error',
+                                            // title: 'Oops...',
+                                            text: 'Error while reversing lodgement.',
+                                            // footer: '<a href="">Why do I have this issue?</a>'
+                                        })
+                                    </script>
+                                @endif
                                 <div id="button-trigger" class="card card card-default scrollspy">
                                     <div class="card-content">
-                                        <h4 class="card-title">Users</h4>
+                                        <h4 class="card-title">Customers</h4>
                                         <div class="row">
                                             
                                             <div class="col s12">
@@ -50,69 +64,44 @@
                                                     </th>
                                                   
                                                     <th>
-                                                       Name
+                                                      Customer Name
                                                     </th>
                                                     <th>
-                                                      Email
-                                                    </th>
-                                                                                                       
-                                                    <th>
-                                                      Role(s)
-                                                    </th>
-                                                    
-                                                    <th>
-                                                      Date Created
+                                                      Balance
                                                     </th>
                                                     <th>
-                                                    Edit
-                                                    </th>
-
-                                                    <th>
-                                                    Delete
+                                                    view orders
                                                     </th>
                                                     <th>
-                                                    Status
+                                                      Lodgement
                                                     </th>
-
                                                   </thead>
                                                   <tbody>
-                                                      @foreach($users_list as $user)
+                                                      @foreach($customers as $customer)
                                                     <tr>
                                                       <td>
-                                                        <a href="{{url('/admin/users/edit-user-accesses/'.$user->id)}}">{{$user->id}}</a>
+                                                        <a href="{{url('/customer/'.$customer->id)}}">{{$customer->id}}</a>
                                                       </td>
                                                       
                                                       <td>
-                                                      {{$user->name}}
+                                                      {{ucwords($customer->name)}}
                                                       </td>
                                                       <td>
-                                                      {{$user->email}}
+                                                      {{number_format($customer->balance,2)}}
+                                                      {{-- <a class="btn-edit" href="{{url('customer/edit/balance/'.$customer->id)}}"><i class="fa fa-edit"></i></a> --}}
                                                       </td>
                                                       
                                                       <td>
-                                                      @foreach($user->getRoleNames() as $role )
-                                                        {{$role}},
-                                                      @endforeach
+                                                      <a href="{{url('/customer/orders/'.$customer->id)}}">View orders</a>
                                                       </td>
-                                                     
+
                                                       <td>
-                                                      {{$user->created_at}}
+                                                      <a href="{{url('/customer/lodgment/'. $customer->id)}}">Add Lodgements</a>
                                                       </td>
-                                                      <td>
-                                                      <a class=" btn green darken-1" href="{{url('/admin/users/edit-user/'.$user->id)}}">Edit User</a>
-                                                      </td>
-                                                      <td>
-                                                      <a class=" btn red darken-1" href="{{url('admin/users/delete-user/'.$user->id)}}">Delete User</a>
-                                                      </td>
-                                                      
-                                                                                                           
-                                                      <td>
-                                                          @if($user->trashed())
-                                                          Disabled
-                                                          @else
-                                                          Active
-                                                          @endif
-                                                      </td>
+                                                      {{-- <td class="action-btn-row">
+                                                         <a class="btn-edit" href="{{url('customer/edit/'.$customer->id)}}"><i class="fa fa-edit"></i></a>
+                                                          <a class="btn-delete" href="{{url('customer/delete/'.$customer->id)}}"><i class="fa fa-times"></i></a>
+                                                      </td> --}}
                                                     </tr>
                                                     @endforeach
                                                   </tbody>
@@ -126,17 +115,18 @@
                       </div>
                 <div class="content-overlay"></div>
             </div>
-           
-@endsection
+      @endsection
 
-@section('footer')
-@parent()
-@endsection
-
-@section('footer_scripts')
-@parent()
-  <!-- BEGIN PAGE VENDOR JS-->
-  <script src="{{asset('app-assets/vendors/data-tables/js/jquery.dataTables.min.js')}}"></script>
+      @section('footer')
+        @parent()
+     
+      @endsection
+      
+    @section('footer_scripts')
+    @parent()
+    
+    <!-- BEGIN PAGE VENDOR JS-->
+    <script src="{{asset('app-assets/vendors/data-tables/js/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('app-assets/vendors/data-tables/extensions/responsive/js/dataTables.responsive.min.js')}}"></script>
     <script src="{{asset('app-assets/vendors/data-tables/js/dataTables.select.min.js')}}"></script>
     <!-- END PAGE VENDOR JS-->
@@ -145,6 +135,9 @@
     <!-- BEGIN PAGE LEVEL JS-->
     <script src="{{asset('app-assets/js/scripts/data-tables.js')}}"></script>
     
-
-@endsection
-    
+      @endsection
+      
+     
+   
+     
+   

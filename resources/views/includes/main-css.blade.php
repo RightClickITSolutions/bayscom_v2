@@ -163,6 +163,20 @@
            h5.breadcrumbs-title{
                color: #fff;
            }
+           h3{
+               color: #000;
+           }
+           .breadcrumbs-page{
+               height: 50px;
+               border-radius: 10px;
+           }
+           .breadcrumbs-page p.breadcrumbs-heading-tag{
+               color: #000;
+           }
+           p.breadcrumbs-heading-tag span.span-page-name{
+               color: #E77828 !important;
+               font-weight: 900;
+           }
         </style>
 
 

@@ -79,7 +79,7 @@
                                                       </table>
                                                       </td>
                                                       <td>
-                                                      {{$prf->customer->name}}
+                                                      {{$prf->customer['name']}}
                                                       </td>
                                                       <td>
                                                       {{$prf->createdBy->name}}

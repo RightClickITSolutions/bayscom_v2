@@ -160,6 +160,7 @@ class AccountsController extends Controller
     }
 
     public function sageAccount(){
+         $account = Account::where('account_name', 'MOFAD_SAGE')->where('account_type','MAIN')->first();
         $unfulfiled_pros = Pro::where('approval_status','APPROVED_NOT_COLLECTED')->get();
         
         $unrecieved_products = [];
@@ -193,6 +194,61 @@ class AccountsController extends Controller
         }
         $view_data['unrecieved_products'] = $unrecieved_products;
         return view('accounts_sage_account',$view_data);
+    }
+
+    public function sageAccountDC(Request $request, Account $account)
+    {
+        $account = Account::where('account_name', 'MOFAD_SAGE')->where('account_type','MAIN')->first();
+        $view_data['account'] = $account;
+        $post_status = new PostStatusHelper;
+
+        if ($request->isMethod('post')) {
+            if($request->input('transaction_type')=='CREDIT'){
+                $request->validate([
+                    'credit_amount' => 'required|numeric',
+                    'transaction_type' => 'required|in:CREDIT,DEBIT|string' 
+                ]);
+                $amount = $request->input('credit_amount');
+            }
+            elseif($request->input('transaction_type')=='DEBIT'){
+                $request->validate([
+                    'debit_amount' => 'required|numeric',
+                    'transaction_type' => 'required|in:CREDIT,DEBIT|string' 
+                ]);
+                $amount = $request->input('debit_amount');
+            }
+            else{
+                $request->validate([
+                    'transaction_type' => 'required|in:CREDIT,DEBIT|string' 
+                ]);
+            }
+            
+            $account_transaction = new AccountTransactionClass;
+            $account_transaction_id = $account_transaction->new_transaction(
+                $account->id,
+                $related_process="ADMIN_POST",
+                $related_process_id=null,
+                $transaction_type=$request->input('transaction_type'),
+                $transaction_amount=$amount,
+                $payment_comment="",
+                $bank_reference=$request->input('bank_reference',''),
+                $approved=true);
+                
+            if ($account_transaction_id) {
+                $post_status->success();
+                $post_status->post_status_message = $request->input('transaction_type').' Post Successful';
+
+            }
+            else{
+                $post_status->failed();
+            }
+        }
+        
+        
+
+        $view_data['post_status'] = $post_status->post_status;
+        $view_data['post_status_message'] = $post_status->post_status_message;
+        return view('accounts_account_post_credit_debits',$view_data);
     }
 
 }

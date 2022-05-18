@@ -64,6 +64,14 @@
                             </div>
                         </div>
                         <div class="row">
+                            <div class="col m12">
+                                <div class="form-control">
+                                     <label for="">Balance</label>
+                                    <input type="number" name="edit_balance" id="" value="{{ $item->balance }}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
                             <div class="col m6">
                                 <div class="form-control">
                                     <button type="submit" class="btn btn-edit"><h6>Save  <i class="fa fa-bookmark"></i></h6></button>

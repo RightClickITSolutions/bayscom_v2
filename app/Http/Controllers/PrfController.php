@@ -186,7 +186,7 @@ class PrfController extends Controller
         return view('prf',$view_data);
     }
 
-    public function view( Request $request){
+    public function viewApproved(Request $request){
         //debug
         //$prfs = Prf::find(2);
         if (  $request->session()->get('post_status') ) {
@@ -194,11 +194,30 @@ class PrfController extends Controller
             $view_data['post_status_message'] = $request->session()->get('post_status_message');
              
         }
-        $prf_list = Prf::withTrashed()->whereIn('warehouse_id',json_decode(Auth::user()->accessibleEntities()->warehouses))->get();
+        $prf_list = Prf::withTrashed()->whereIn('warehouse_id',json_decode(Auth::user()->accessibleEntities()->warehouses))->where('approval_status', 'APPROVED_COLLECTED')->get();
+        $view_data['prf_list'] = $prf_list;
+
+        // return $view_data['prf_list'];
+        //debug
+        //return $prf->createdBy;
+        return view('view_approve_prf',$view_data);
+    }
+
+    public function view(Request $request)
+    {
+         //debug
+        //$prfs = Prf::find(2);
+        if (  $request->session()->get('post_status') ) {
+            $view_data['post_status'] = $request->session()->get('post_status');
+            $view_data['post_status_message'] = $request->session()->get('post_status_message');
+             
+        }
+        $prf_list = Prf::withTrashed()->whereIn('warehouse_id',json_decode(Auth::user()->accessibleEntities()->warehouses))->where('approval_status', 'INITIATED')->get();
         $view_data['prf_list'] = $prf_list;
         //debug
         //return $prf->createdBy;
         return view('view_approve_prf',$view_data);
+        // return $view_data['prf_list'];
     }
 
     public function prfPayment(Request $request, Prf $prf){
@@ -300,6 +319,10 @@ class PrfController extends Controller
         
         $prf_list = Prf::all()->where('approval_status','APPROVED_NOT_COLLECTED')->whereIn('warehouse_id',json_decode(Auth::user()->accessibleEntities()->warehouses));
         $view_data['prf_list'] = $prf_list;
+
+        // foreach ($prf_list as $list) {
+        //     return $list->client_id;
+        // }
 
         return view('prf_store_keeper',$view_data);
     }

@@ -31,11 +31,26 @@
                         <!-- DataTables example -->
                         <div class="row">
                             <div class="col s12 m12 l12">
-                              @if (session()->has('status'))
-                                  <div class="alert alert-success">
-                                      {{  session('status') }}
-                                  </div>
+                               @if (session()->has('status'))
+                                  <script type="application/javascript">
+                                      Swal.fire({
+                                          icon: 'success',
+                                          // title: 'Oops...',
+                                          text: 'Customer Edited',
+                                          // footer: '<a href="">Why do I have this issue?</a>'
+                                      })
+                                  </script>
                               @endif
+                               @if (session()->has('status-balance'))
+                                    <script type="application/javascript">
+                                        Swal.fire({
+                                            icon: 'success',
+                                            // title: 'Oops...',
+                                            text: 'Balance has been changed',
+                                            // footer: '<a href="">Why do I have this issue?</a>'
+                                        })
+                                    </script>
+                                @endif
                                 <div id="button-trigger" class="card card card-default scrollspy">
                                     <div class="card-content">
                                         <h4 class="card-title">Customers</h4>
@@ -95,6 +110,7 @@
                                                      
                                                       <td>
                                                       {{number_format($customer->balance,2)}}
+                                                      {{-- <a class="btn-edit" href="{{url('customer/edit/balance/'.$customer->id)}}"><i class="fa fa-edit"></i></a> --}}
                                                       </td>
                                                       
                                                       <td>

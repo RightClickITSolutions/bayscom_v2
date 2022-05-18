@@ -21,13 +21,26 @@ Route::group(['middleware' => ['auth']], function() {
     Route::any('/customer/orders/{customer}', 'CustomerController@viewCustomerOrders');
     Route::any('/customer/transactions/{customer}', 'CustomerController@viewCustomerTransactions');
     Route::any('/customer/edit/{customer}', 'CustomerController@customerEdit');
+    Route::any('/customer/edit/balance/{customer}', 'CustomerController@customerEditBalance');
+    Route::any('/customer/edit/balance/inst-edit/{customer}', 'CustomerController@customerEditBalanceInts');
     Route::any('/customer/edit/inst-edit/{customer}', 'CustomerController@instEdit');
     Route::any('/customer/delete/{customer}', 'CustomerController@customerDelete');
     Route::any('/customer/delete/inst-delete/{customer}', 'CustomerController@instDelete');
     Route::any('/customer/lodgment/{customer}', 'CustomerController@customerPayment');
     Route::any('customer/lodgement/confirmation', 'CustomerController@confirmCustomerLogement');
+    Route::any('customer/lodgement/confirm', 'CustomerController@confirmCustomerLogementInst');
     Route::any('/approve-customer-lodgement', 'ApprovalController@customerLodgement');
+
+    // lodgements
+
+    Route::any('/lodgements/view', 'LodgementsController@lodgementView');
+    Route::any('/lodgements/create', 'LodgementsController@lodgementCreate');
+    Route::any('customer/lodgement/reversal/{lodgement}', 'CustomerController@reverseLodgement');
+    Route::any('customer/lodgement/reversal/inst-reversal/{lodgement}', 'CustomerController@reverseInstLodgement');
+    Route::any('/lodgements/confirm', 'LodgementsController@lodgementConfirm');
     
+
+
     //todo
     //add view and controller
     Route::any('/customer/{customer_id}', 'CustomerController@viewAllCustomers');
@@ -42,6 +55,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::any('/pro/store-keeper/{pro}', 'ProController@proReceiveGoods');
     Route::any('/create-prf', 'PrfController@createPrf')->middleware("permission:create_prf");
     Route::any('/view-prf', 'PrfController@view');
+    Route::any('approved/view-prf', 'PrfController@viewApproved');
     Route::any('/approve-prf', 'ApprovalController@prf');
     Route::any('/prf/store-keeper', 'PrfController@prfStorekeeper');
     Route::any('/prf/payment/{prf}', 'PrfController@prfPayment');
@@ -159,6 +173,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::any('/admin/users/create-user', 'UserController@createUser');
     Route::any('/admin/users/edit-user/{user}', 'UserController@editUser');
     Route::any('/admin/users/delete-user/{user}', 'UserController@deleteUser');
+    Route::any('/admin/users/delete-user/inst-delete/{user}', 'UserController@instDeleteUser');
     Route::any('/admin/users/view-users', 'UserController@viewUsers');
     Route::any('/admin/users/edit-user-accesses/{user}', 'UserController@editUserAccesses');
     Route::any('/admin/users/assign-user-roles/{user}', 'UserController@assignUserRoles');
@@ -182,6 +197,10 @@ Route::group(['middleware' => ['auth']], function() {
     Route::any('/admin/lubebay-services/create-service', 'ServiceController@createLubebayService');
     Route::any('/admin/lubebay-services/edit-service/{service}', 'ServiceController@editLubebayService');
     Route::any('/admin/lubebay-services/delete-service/{service}', 'ServiceController@deleteLubebayService');
+
+    // Sage Account
+
+    Route::any('accounts/sage-account/debit-credit', 'AccountsController@sageAccountDC');
 
 
 });

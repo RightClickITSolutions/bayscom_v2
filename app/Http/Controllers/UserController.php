@@ -140,21 +140,39 @@ class UserController extends Controller
         return view('view_users',$view_data);
     }
 
-    public function deleteUser(Request $request, User $user ){
+    public function deleteUser(Request $request, $cid){
         $post_status = new PostStatusHelper;
 
-        if($user->delete())
-        {
-            $post_status->success();
-        }
-        else{
-            $post_status->failed();
-        }
-        $view_data['post_status'] = $post_status->post_status;
-        $view_data['post_status_message'] = $post_status->post_status_message;
-        $view_data['users_list'] = User::withTrashed()->get();
+        $view_data['user_delete_data'] = User::where('id', $cid)->get();
+        return view('delete_user_prompt', $view_data);
 
-        return view('view_users',$view_data);
+        // if($user->delete())
+        // {
+        //     $post_status->success();
+        // }
+        // else{
+        //     $post_status->failed();
+        // }
+        // $view_data['post_status'] = $post_status->post_status;
+        // $view_data['post_status_message'] = $post_status->post_status_message;
+        // $view_data['users_list'] = User::withTrashed()->get();
+
+        // return view('view_users',$view_data);
+    }
+
+    public function instDeleteUser(Request $request)
+    {
+        $cid = $request->input('cid');
+
+        $deleted = User::where('id', $cid)->delete();
+
+        if ($deleted) {
+            $request->session()->flash('status', 'User deleted!');
+            return redirect('/admin/users/view-users');
+        }else{
+            $request->session()->flash('status', 'User not deleted!');
+            return redirect('/admin/users/view-users');
+        }
     }
 
     public function editUserAccesses(User $user){

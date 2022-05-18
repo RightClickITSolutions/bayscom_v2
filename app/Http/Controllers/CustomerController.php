@@ -94,6 +94,34 @@ class CustomerController extends Controller
         //return Customer::find(4)->customerType;
         $view_data['customers'] =  Customer::whereIn('state',json_decode(Auth::user()->accessibleEntities()->states) )->where('customer_type', 1)->get();
         return view('view_all_customers', $view_data);
+
+        // return $view_data['customers'];
+    }
+
+    public function customerEditBalance($cid)
+    {
+        $view_data['customer_edit_balance'] = Customer::where('id', $cid)->get();
+
+        return view('edit_balance', $view_data);
+    }
+
+    public function customerEditBalanceInts(Request $request)
+    {
+        $cid = $request->input('edit_id');
+        $edit_balance = $request->input('edit_balance');
+
+         $edit_customer = Customer::where('id', $cid)->update([
+            "balance" => $edit_balance
+        ]);
+
+        if ($edit_customer) {
+            $request->session()->flash('status-balance', 'Balance has been changed');
+            return redirect('/customers');
+        }else{
+            $request->session()->flash('status-balance', 'Error changing balance');
+            return redirect('/customers');
+        }
+
     }
 
     public function viewCustomerOrders(Customer $customer){
@@ -180,8 +208,17 @@ class CustomerController extends Controller
     public function confirmCustomerLogement(){
         $direct_sales_customers_array = Customer::all()->whereIn('state',json_decode(Auth::user()->accessibleEntities()->states) )->where('customer_type',1)->pluck('id')->toArray();
         
-        $view_data['customer_payment_transactions'] = CustomerTransaction::where('transaction_type','CREDIT')->whereIn('customer_id',$direct_sales_customers_array)->get();
-        return view('customer_lodgement_history', $view_data);
+        $view_data['customer_payment_transactions'] = CustomerTransaction::where('transaction_type','CREDIT')->where('approval_status', 'CONFIRMED')->whereIn('customer_id',$direct_sales_customers_array)->limit(100)->get();
+        return view('lodgements.view', $view_data);
+    }
+
+    public function confirmCustomerLogementInst()
+    {
+        $direct_sales_customers_array = Customer::all()->whereIn('state',json_decode(Auth::user()->accessibleEntities()->states) )->where('customer_type',1)->pluck('id')->toArray();
+        
+        $view_data['customer_payment_transactions'] = CustomerTransaction::where('transaction_type','CREDIT')->where('approval_status', 'NOT_CONFIRMED')->whereIn('customer_id',$direct_sales_customers_array)->get();
+        return view('lodgements.view', $view_data);
+        // return $view_data['customer_payment_transactions'];
     }
 
     public function customerEdit($cid)
@@ -196,6 +233,7 @@ class CustomerController extends Controller
         $email = $request->input('edit_email');
         $phone = $request->input('edit_phone');
         $address = $request->input('edit_address');
+        $balance = $request->input('edit_balance');
 
         $state = '';
 
@@ -211,6 +249,7 @@ class CustomerController extends Controller
             "email" => $email,
             "phone" => $phone,
             "state" => $state,
+            "balance" => $balance,
         ]);
 
         if ($edit_customer) {
@@ -238,6 +277,28 @@ class CustomerController extends Controller
         }else{
             $request->session()->flash('status', 'Customer not deleted!');
             return redirect('/customers');
+        }
+    }
+
+    public function reverseLodgement($lid)
+    {
+        $view_data['lodgement_to_reverse'] = CustomerTransaction::where('id', $lid)->get();
+
+        return view('lodgements.reverse', $view_data);
+    }
+
+    public function reverseInstLodgement(Request $request)
+    {
+        $lid = $request->input('lid');
+        
+        $reverse_lodgement = CustomerTransaction::where('id', $lid)->delete();
+
+        if ($reverse_lodgement) {
+            $request->session()->flash('status', 'Lodgement Reverse successfully.');
+            return redirect('/customer/lodgement/confirmation');
+        }else{
+            $request->session()->flash('status_error', 'Error while reversing lodgement.');
+            return redirect('/customer/lodgement/confirmation');
         }
     }
 }

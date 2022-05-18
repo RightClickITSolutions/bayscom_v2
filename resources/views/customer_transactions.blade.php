@@ -38,11 +38,11 @@
                             <div class="card-content">
                                 <h4 class="card-title">Transactions</h4>
                                 <div class="row">
-                                    <div class="col s12 pull-right">
+                                    {{-- <div class="col s12 pull-right">
                                         <a href="{{ url('/customer/lodgment/' . $customer->id) }}"
                                             class="btn cyan waves-effect waves-light green darken-1 right"> Add new customer
                                             payment/lodgement</a>
-                                    </div>
+                                    </div> --}}
                                     <div class="col s12">
                                         <table id="data-table-simple" class="display">
                                             <thead>

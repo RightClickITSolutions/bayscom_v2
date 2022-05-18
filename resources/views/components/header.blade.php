@@ -2,10 +2,10 @@
     <div class="navbar navbar-fixed">
         <nav class="navbar-main navbar-color nav-collapsible sideNav-lock navbar-light">
             <div class="nav-wrapper">
-                <div class="header-search-wrapper hide-on-med-and-down"><i class="material-icons">search</i>
+                {{-- <div class="header-search-wrapper hide-on-med-and-down"><i class="material-icons">search</i>
                     <!-- <input class="header-search-input z-depth-2" type="text" name="Search" placeholder="Explore Materialize" data-search="template-list">
                     <ul class="search-list collection display-none"></ul> -->
-                </div>
+                </div> --}}
                 <ul class="navbar-list right hide">
                     <li class="dropdown-language"><a class="waves-effect waves-block waves-light translation-button"
                             href="#" data-target="translation-dropdown"><span
