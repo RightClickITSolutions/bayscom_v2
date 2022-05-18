@@ -43,7 +43,7 @@
                             <div class="row margin">
                                 <div class="input-field col s12">
                                     {{-- <i class="material-icons prefix pt-2">person_outline</i> --}}
-                                    <span class="form-label-input">Email Address test</span>
+                                    <span class="form-label-input">Email Address</span>
                                     <input id="email" type="email" class=" @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Email Address" >
                                     {{-- <label for="email" class="center-align">Email</label> --}}
                                     @error('email')
