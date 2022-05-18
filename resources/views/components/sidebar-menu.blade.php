@@ -334,7 +334,7 @@ class="sidenav-main nav-expanded nav-lock nav-collapsible sidenav-dark side-nav-
     @can('view_general_expenses')
         <li class="bold"><a class="collapsible-header waves-effect waves-cyan "
                 href="JavaScript:void(0)"><i class="material-icons">book</i><span class="menu-title"
-                    data-i18n="Menu levels">BAYSCOM Main Expenses</span></a>
+                    data-i18n="Menu levels">Bayscom Main Expenses</span></a>
             <div class="collapsible-body">
                 <ul class="collapsible collapsible-sub" data-collapsible="accordion">
                     @can('add_general_expenses')
