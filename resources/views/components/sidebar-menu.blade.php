@@ -306,7 +306,7 @@ class="sidenav-main nav-expanded nav-lock nav-collapsible sidenav-dark side-nav-
                     data-i18n="Menu levels">Retail Outlet</span></a>
             <div class="collapsible-body">
                 <ul class="collapsible collapsible-sub" data-collapsible="accordion">
-                     <li><a href="{{ url('/lubebays/view') }}"><i
+                     {{-- <li><a href="{{ url('/lubebays/view') }}"><i
                                     class="material-icons">radio_button_unchecked</i><span
                                     data-i18n="Second level">Retail Outlet</span></a>
                         </li>
@@ -324,6 +324,26 @@ class="sidenav-main nav-expanded nav-lock nav-collapsible sidenav-dark side-nav-
                     <li><a href="{{ url('/lubebay/lodgement') }}"><i
                                 class="material-icons">radio_button_unchecked</i><span
                                 data-i18n="Second level">Lodgement</span></a>
+                    </li> --}}
+                    @can('post_lubebay_sales')
+                        <li><a href="{{ url('/lubebay/substore/days-transactions/submit') }}"><i
+                                    class="material-icons">radio_button_unchecked</i><span
+                                    data-i18n="Second level">Lubricant Sales</span></a>
+                        </li>
+
+                    @endcan
+                    <li><a href="{{ url('/lubebay/substore/days-transactions/view') }}"><i
+                                class="material-icons">radio_button_unchecked</i><span data-i18n="Second level"
+                                class=" text-wrap">Confirm Lubricant Sale</span></a>
+                    </li>
+
+                    <li><a href="{{ url('/lubebay/substore/lodgement') }}"><i
+                                class="material-icons">radio_button_unchecked</i><span
+                                data-i18n="Second level">Lubricant Lodgements</span></a>
+                    </li>
+                    <li><a href="{{ url('/substore/inventory') }}"><i
+                                class="material-icons">radio_button_unchecked</i><span
+                                data-i18n="Second level">Inventory</span></a>
                     </li>
                 </ul>
             </div>
