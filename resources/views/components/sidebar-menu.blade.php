@@ -582,17 +582,17 @@ class="sidenav-main nav-expanded nav-lock nav-collapsible sidenav-dark side-nav-
 
                     <li><a href="{{ url('/admin/create/station-lubebay') }}"><i
                                 class="material-icons">radio_button_unchecked</i><span
-                                data-i18n="Second level">Create Lubebay</span></a>
+                                data-i18n="Second level">Retail Outlet</span></a>
                     </li>
 
                     <li><a href="{{ url('/admin/create/station-lubebay') }}"><i
                                 class="material-icons">radio_button_unchecked</i><span
-                                data-i18n="Second level">Create Substore</span></a>
+                                data-i18n="Second level">Substore</span></a>
                     </li>
 
                     <li><a href="{{ url('/admin/create/warehouse') }}"><i
                                 class="material-icons">radio_button_unchecked</i><span
-                                data-i18n="Second level">Create Warehouse</span></a>
+                                data-i18n="Second level">Warehouse</span></a>
                     </li>
 
                     <!--                         
