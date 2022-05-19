@@ -783,6 +783,13 @@ class SubstoreController extends Controller
         return view('admin_create_station_lubebay',$view_data);
        
     }
+
+    public function viewRetailOutlet()
+    {
+        $view_data['retail_list'] = Substore::all();
+        return view('retail_outlet_view', $view_data);
+        // return $view_data['retail_list'];
+    }
     
     public function viewStations(){
         $view_data['stations_list'] = Auth::user()->allowedSubstores()->where('type',2);

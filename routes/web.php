@@ -98,6 +98,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::any('/lubebay/lodgement', 'LubebayController@lubebayLodgementLubebays');
     
     Route::any('/admin/create/station-lubebay', 'SubstoreController@createSubstoreLubebay');
+    Route::any('/admin/view/retail-outlet', 'SubstoreController@viewRetailOutlet');
     Route::any('/admin/create/warehouse', 'WarehouseController@createWarehouse');
     
     Route::any('/expense/add-expense', 'ExpenseController@addExpense');

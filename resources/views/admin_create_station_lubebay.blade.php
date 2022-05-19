@@ -24,7 +24,10 @@
                             <div class="col s12 m12 l12">
                                 <div id="form-with-validation" class="card card card-default scrollspy">
                                     <div class="card-content">
-                                        <h4 class="card-title"> Create Station/Lubebay</h4>
+                                        <h4 class="card-title"> Create Retail Outlet</h4>
+                                        <a href="/admin/view/retail-outlet" class="btn btn-success">
+                                            View All Retail Outlets
+                                        </a>
                                         <form action="{{url('/admin/create/station-lubebay')}}" method="POST" >
                                           {{csrf_field()}}
                                             <div>
