@@ -25,6 +25,9 @@
                                 <div id="form-with-validation" class="card card card-default scrollspy">
                                     <div class="card-content">
                                         <h4 class="card-title"> Create Warehouse</h4>
+                                        <a href="/view/warehouses" class="btn">
+                                            View all Warehouses
+                                        </a>
                                         <form action="{{url('/admin/create/warehouse')}}" method="POST" >
                                           {{csrf_field()}}
                                             

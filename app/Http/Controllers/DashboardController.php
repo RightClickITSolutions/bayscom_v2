@@ -924,7 +924,7 @@ class DashboardController extends Controller
 
     public function viewWarehouses(){
         $view_data['warehouse_list'] = Warehouse::all();
-        return view('dashboard_warehouse_list',$view_data);
+        return view('view_warehouse',$view_data);
     }
 
     public function wareouseSales(Request $request, State $state){

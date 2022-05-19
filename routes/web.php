@@ -143,7 +143,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::any('/lubebay/delete/{lubebay}', 'LubebayController@deleteLubebay');
     Route::any('/lubebay/delete/inst-delete/{lubebay}', 'LubebayController@instDeleteLubebay');
     Route::any('/states', 'DashboardController@viewStates');
-    Route::any('/warehouses', 'DashboardController@viewWarehouses');
+    Route::any('view/warehouses', 'DashboardController@viewWarehouses');
 
 
     Route::any('/storekeeper/issue-history', 'PrfController@storekeeperIssueHistory');
