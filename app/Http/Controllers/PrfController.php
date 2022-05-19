@@ -194,7 +194,7 @@ class PrfController extends Controller
             $view_data['post_status_message'] = $request->session()->get('post_status_message');
              
         }
-        $prf_list = Prf::withTrashed()->whereIn('warehouse_id',json_decode(Auth::user()->accessibleEntities()->warehouses))->where('approval_status', 'APPROVED_COLLECTED')->get();
+        $prf_list = Prf::withTrashed()->whereIn('warehouse_id',json_decode(Auth::user()->accessibleEntities()->warehouses))->where('approval_status', 'APPROVED_COLLECTED')->limit(200)->get();
         $view_data['prf_list'] = $prf_list;
 
         // return $view_data['prf_list'];
