@@ -263,4 +263,57 @@ class WarehouseController extends Controller
 
         return view('edit_warehouse', $view_data);
     }
+
+    public function instEditWarehouse(Request $request)
+    {
+        $new_state = '';
+        $wid = $request->input('edit_id');
+        $warehouse_edit_name = $request->input('edit_name');
+        $warehouse_edit_state = strtoupper($request->input('edit_state'));
+        $warehouse_edit_address = $request->input('edit_location');
+        
+        if ($warehouse_edit_state == 'ABUJA') {
+            $new_state = 1;
+        }elseif($warehouse_edit_state == 'KANO'){
+            $new_state = 2;
+        }
+
+        $edit_warehouse = Warehouse::where('id', $wid)->update([
+            "name" => $warehouse_edit_name,
+            "state" => $new_state,
+            "location" => $warehouse_edit_address,
+        ]);
+
+        if ($edit_warehouse) {
+            $request->session()->flash('warehouse_edit', 'Warehouse Edited!');
+            return redirect('/view/warehouses');
+        }else{
+            $request->session()->flash('warehouse_edit_error', 'Error editing warehouse!');
+            return redirect('/view/warehouses');
+        }
+
+    }
+
+    public function deleteWarehouse($wid)
+    {
+         $view_data['warehouse_data'] = Warehouse::where('id', $wid)->get();
+
+        return view('delete_prompt_warehouse', $view_data);
+    }
+
+    public function instDeleteWarehouse(Request $request)
+    {
+        $wid = $request->input('wid');
+
+        $delete_warehouse = Warehouse::where('id', $wid)->delete();
+
+        if ($delete_warehouse) {
+            $request->session()->flash('warehouse_delete', 'Warehouse Deleted!');
+            return redirect('/view/warehouses');
+        }else{
+            $request->session()->flash('warehouse_delete_error', 'Error deleting warehouse!');
+            return redirect('/view/warehouses');
+        }
+
+    }
 }

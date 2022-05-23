@@ -25,6 +25,7 @@
                             <div class="form-control">
                                 <label for="">Warehouse Name</label>
                                 <input type="text" name="edit_name" id="" value="{{ $item->name }}">
+                                <input type="hidden" name="edit_id" id="" value="{{ $item->id }}">
                             </div>
                         </div>
                     </div>
@@ -32,7 +33,12 @@
                         <div class="col m12">
                             <div class="form-control">
                                 <label for="">State Name</label>
-                                <input type="text" name="edit_state" id="" value="{{ $item->state }}">
+                                @if ($item->state == 1)
+                                    <input type="text" name="edit_state" id="" value="Abuja">
+                                @endif
+                                @if ($item->state == 2)
+                                    <input type="text" name="edit_state" id="" value="Kano">
+                                @endif
                             </div>
                         </div>
                     </div>

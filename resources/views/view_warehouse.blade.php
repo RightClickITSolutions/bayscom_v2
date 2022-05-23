@@ -31,22 +31,42 @@
                         <!-- DataTables example -->
                         <div class="row">
                             <div class="col s12 m12 l12">
-                               @if (session()->has('status'))
+                               @if (session()->has('warehouse_edit'))
                                   <script type="application/javascript">
                                       Swal.fire({
                                           icon: 'success',
                                           // title: 'Oops...',
-                                          text: 'Customer Edited',
+                                          text: 'Warehouse Edited',
                                           // footer: '<a href="">Why do I have this issue?</a>'
                                       })
                                   </script>
                               @endif
-                               @if (session()->has('status-balance'))
+                               @if (session()->has('warehouse_edit_error'))
                                     <script type="application/javascript">
                                         Swal.fire({
                                             icon: 'success',
                                             // title: 'Oops...',
-                                            text: 'Balance has been changed',
+                                            text: 'Error while editing warehouse!!',
+                                            // footer: '<a href="">Why do I have this issue?</a>'
+                                        })
+                                    </script>
+                                @endif
+                                @if (session()->has('warehouse_delete_error'))
+                                    <script type="application/javascript">
+                                        Swal.fire({
+                                            icon: 'success',
+                                            // title: 'Oops...',
+                                            text: 'Error while editing warehouse!!',
+                                            // footer: '<a href="">Why do I have this issue?</a>'
+                                        })
+                                    </script>
+                                @endif
+                                @if (session()->has('warehouse_delete'))
+                                    <script type="application/javascript">
+                                        Swal.fire({
+                                            icon: 'success',
+                                            // title: 'Oops...',
+                                            text: 'Error while editing warehouse!!',
                                             // footer: '<a href="">Why do I have this issue?</a>'
                                         })
                                     </script>

@@ -196,6 +196,10 @@ Route::group(['middleware' => ['auth']], function() {
 
 
     Route::any('admin/warehouse/edit/{warehouse}', 'WarehouseController@editWarehouse');
+    Route::any('admin/warehouse/edit/inst-edit/{warehouse}', 'WarehouseController@instEditWarehouse');
+
+    Route::any('admin/warehouse/delete/{warehouse}', 'WarehouseController@deleteWarehouse');
+    Route::any('admin/warehouse/delete/inst-delete/{warehouse}', 'WarehouseController@instDeleteWarehouse');
 
     
     Route::any('/admin/lubebay-services/view-services', 'ServiceController@viewLubebayServices');
