@@ -72,7 +72,7 @@
                                                     {{$sst->amount}}
                                                     </td>
                                                     <td>
-                                                    {{$sst->substore->name}}
+                                                    {{$sst->substore['name']}}
                                                     </td>
                                                     <td>
                                                     {{$sst->createdBy->name}}

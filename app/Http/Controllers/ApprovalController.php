@@ -474,11 +474,11 @@ class ApprovalController extends Controller
             //die($permission_name);
             if(Auth::user()->hasPermissionTo('approve_sst_l1')){
                 $sst = SubstoreTransaction::find($request->get('process_id'));
-                if($sst->approval_status == 'CONFIRMED')
+                if($sst['approval_status'] == 'CONFIRMED')
                 {
                    throw ValidationException::withMessages(['Approval' => 'This sales entry Has Already been confirmed']);
                 }
-                elseif($sst->approval_status == 'DECLINED'){
+                elseif($sst['approval_status'] == 'DECLINED'){
                     throw ValidationException::withMessages(['Approval' => 'This sales entry Has already been declined']);
 
                 }
