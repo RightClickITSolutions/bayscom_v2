@@ -198,6 +198,12 @@ Route::group(['middleware' => ['auth']], function() {
     Route::any('admin/warehouse/edit/{warehouse}', 'WarehouseController@editWarehouse');
     Route::any('admin/warehouse/edit/inst-edit/{warehouse}', 'WarehouseController@instEditWarehouse');
 
+    Route::any('admin/substore/edit/{substore}', 'SubstoreController@editSubstore');
+    Route::any('admin/substore/edit/inst-edit/{substore}', 'SubstoreController@instEditSubstore');
+
+     Route::any('admin/substore/delete/{substore}', 'SubstoreController@deleteSubstore');
+    Route::any('admin/substore/delete/inst-delete/{substore}', 'SubstoreController@instDeleteSubstore');
+
     Route::any('admin/warehouse/delete/{warehouse}', 'WarehouseController@deleteWarehouse');
     Route::any('admin/warehouse/delete/inst-delete/{warehouse}', 'WarehouseController@instDeleteWarehouse');
 

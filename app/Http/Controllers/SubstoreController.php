@@ -790,6 +790,66 @@ class SubstoreController extends Controller
         return view('retail_outlet_view', $view_data);
         // return $view_data['retail_list'];
     }
+
+    public function editSubstore($sid)
+    {
+        $view_data['retail_list'] = Substore::where('id', $sid)->get();
+        // return $view_data['retail_list'];
+        return view('substore_edit', $view_data);
+    }
+
+     public function instEditSubstore(Request $request)
+    {
+        $new_state = '';
+        $sid = $request->input('edit_id');
+        $warehouse_edit_name = $request->input('edit_name');
+        $warehouse_edit_state = strtoupper($request->input('edit_state'));
+        
+        if ($warehouse_edit_state == 'ABUJA') {
+            $new_state = 1;
+        }elseif($warehouse_edit_state == 'KANO'){
+            $new_state = 2;
+        }
+
+        $edit_substore = Substore::where('id', $sid)->update([
+            "name" => $warehouse_edit_name,
+            "state" => $new_state,
+        ]);
+
+        if ($edit_substore) {
+            $request->session()->flash('substore_edit', 'Retail Outlet Edited!');
+            return redirect('/admin/view/retail-outlet');
+        }else{
+            $request->session()->flash('substore_edit_error', 'Error editing Retail Outlet!');
+            return redirect('/admin/view/retail-outlet');
+        }
+
+    }
+
+    public function deleteSubstore($sid)
+    {
+        $view_data['retail_outlet_data'] = Substore::where('id', $sid)->get();
+
+        return view('delete_prompt_retailoutlet', $view_data);
+    }
+
+    public function instDeleteSubstore(Request $request)
+    {
+        $sid = $request->input('sid');
+
+        $delete_warehouse = Substore::where('id', $sid)->delete();
+
+        if ($delete_warehouse) {
+            $request->session()->flash('substore_delete', 'Retail Outlet Deleted!');
+            return redirect('/admin/view/retail-outlet');
+        }else{
+            $request->session()->flash('substore_edit_error', 'Error editing Retail Outlet!');
+            return redirect('/admin/view/retail-outlet');
+        }
+
+
+        // return $sid;
+    }
     
     public function viewStations(){
         $view_data['stations_list'] = Auth::user()->allowedSubstores()->where('type',2);

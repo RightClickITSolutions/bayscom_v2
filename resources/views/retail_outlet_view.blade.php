@@ -31,26 +31,27 @@
                         <!-- DataTables example -->
                         <div class="row">
                             <div class="col s12 m12 l12">
-                               @if (session()->has('status'))
+                               @if (session()->has('substore_edit'))
                                   <script type="application/javascript">
                                       Swal.fire({
                                           icon: 'success',
                                           // title: 'Oops...',
-                                          text: 'Customer Edited',
+                                          text: 'Retail Outlet Edited',
                                           // footer: '<a href="">Why do I have this issue?</a>'
                                       })
                                   </script>
                               @endif
-                               @if (session()->has('status-balance'))
-                                    <script type="application/javascript">
-                                        Swal.fire({
-                                            icon: 'success',
-                                            // title: 'Oops...',
-                                            text: 'Balance has been changed',
-                                            // footer: '<a href="">Why do I have this issue?</a>'
-                                        })
-                                    </script>
-                                @endif
+                              @if (session()->has('substore_delete'))
+                                  <script type="application/javascript">
+                                      Swal.fire({
+                                          icon: 'success',
+                                          // title: 'Oops...',
+                                          text: 'Retail Outlet Deleted',
+                                          // footer: '<a href="">Why do I have this issue?</a>'
+                                      })
+                                  </script>
+                              @endif
+                              
                                 <div id="button-trigger" class="card card card-default scrollspy">
                                     <div class="card-content">
                                         <h4 class="card-title">Retail Outlets</h4>
@@ -86,8 +87,8 @@
                                                             <td>Kano</td>
                                                         @endif
                                                         <td class="action-btn-row">
-                                                            <a class="btn-edit" href="{{url('admin/retail-outlet/edit/'.$item->id)}}"><i class="fa fa-edit"></i></a>
-                                                            <a class="btn-delete" href="{{url('admin/retail-outlet/delete/'.$item->id)}}"><i class="fa fa-times"></i></a>
+                                                            <a class="btn-edit" href="{{url('admin/substore/edit/'.$item->id)}}"><i class="fa fa-edit"></i></a>
+                                                            <a class="btn-delete" href="{{url('admin/substore/delete/'.$item->id)}}"><i class="fa fa-times"></i></a>
                                                         </td>
                                                       </tr>
                                                     @endforeach
