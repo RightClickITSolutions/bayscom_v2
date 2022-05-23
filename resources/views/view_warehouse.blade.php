@@ -86,8 +86,8 @@
                                                             <td>Kano</td>
                                                         @endif
                                                         <td class="action-btn-row">
-                                                            <a class="btn-edit" href="{{url('admin/retail-outlet/edit/'.$item->id)}}"><i class="fa fa-edit"></i></a>
-                                                            <a class="btn-delete" href="{{url('admin/retail-outlet/delete/'.$item->id)}}"><i class="fa fa-times"></i></a>
+                                                            <a class="btn-edit" href="{{url('admin/warehouse/edit/'.$item->id)}}"><i class="fa fa-edit"></i></a>
+                                                            <a class="btn-delete" href="{{url('admin/warehouse/delete/'.$item->id)}}"><i class="fa fa-times"></i></a>
                                                         </td>
                                                       </tr>
                                                     @endforeach

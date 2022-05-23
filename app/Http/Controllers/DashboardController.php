@@ -927,6 +927,7 @@ class DashboardController extends Controller
         return view('view_warehouse',$view_data);
     }
 
+
     public function wareouseSales(Request $request, State $state){
 
         $start_time= now()->startOfMonth()->startOfDay() ;

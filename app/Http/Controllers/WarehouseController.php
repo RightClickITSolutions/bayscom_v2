@@ -256,4 +256,11 @@ class WarehouseController extends Controller
 
 
     }
+
+    function editWarehouse($wid)
+    {
+        $view_data['warehouse_data'] = Warehouse::where('id', $wid)->get();
+
+        return view('edit_warehouse', $view_data);
+    }
 }

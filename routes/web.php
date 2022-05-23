@@ -193,6 +193,10 @@ Route::group(['middleware' => ['auth']], function() {
     Route::any('/admin/inventory-adjustment/', 'StockInventoryController@InventoryAdjustmetSelectionPage');
     Route::any('/admin/substore/inventory-adjustment/{substore}/{product}/', 'StockInventoryController@substoreStockAdjustment');
     Route::any('/admin/warehouse/inventory-adjustment/{warehouse}/{product}/', 'StockInventoryController@warehouseStockAdjustment');
+
+
+    Route::any('admin/warehouse/edit/{warehouse}', 'WarehouseController@editWarehouse');
+
     
     Route::any('/admin/lubebay-services/view-services', 'ServiceController@viewLubebayServices');
     Route::any('/admin/lubebay-services/create-service', 'ServiceController@createLubebayService');
