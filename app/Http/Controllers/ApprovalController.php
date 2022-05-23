@@ -524,7 +524,7 @@ class ApprovalController extends Controller
                         else{
 
                             $post_status = "FAILED";
-                            $post_status_message = "Please Decline. Slales order Exceeds Inventory";
+                            $post_status_message = "Please Decline. Sales order Exceeds Inventory";
                             $view_data['errors'] = $this->substoreInvetoryAlailability($sst);
                         }
                         
