@@ -395,7 +395,7 @@ class="sidenav-main nav-expanded nav-lock nav-collapsible sidenav-dark side-nav-
         </li>
     @endcan --}}
 
-    <!-- add access cntrl -->
+    {{-- <!-- add access cntrl -->
     <li class="bold"><a class="collapsible-header waves-effect waves-cyan "
             href="JavaScript:void(0)"><i class="material-icons">book</i><span class="menu-title"
                 data-i18n="Menu levels">Reports</span></a>
@@ -427,7 +427,7 @@ class="sidenav-main nav-expanded nav-lock nav-collapsible sidenav-dark side-nav-
                  -->
             </ul>
         </div>
-    </li>
+    </li> --}}
 
 
     <!-- add access cntrl -->
