@@ -24,6 +24,8 @@ use Alert;
 
 use App\Http\Controllers\Custom\AccountTransactionClass;
 use App\Http\Controllers\Custom\CommitSubstoreTransaction;
+use App\Models\Transaction;
+
 class SubstoreController extends Controller
 {
     public function __construct()
@@ -610,6 +612,35 @@ class SubstoreController extends Controller
         $view_data['post_status'] = $post_status;
         $view_data['post_status_message'] = $post_status_message;
         return view('view_approve_sst',$view_data);
+    }
+
+    public function reverseSales($sst_id)
+    {
+        $delete_transaction = SubstoreTransaction::where('id', $sst_id)->delete();
+        if ($delete_transaction) {
+            $view_data = [];
+            $view_data['products'] = Product::all();
+            $substores = Auth::user()->allowedSubstores()->where('type',2);
+            $sst_list = new Collection();
+            foreach ($substores as $substore) {
+                foreach ($substore->ssts as $sst) {
+                    if($sst->comment == null){
+                        
+                        $sst_list->push($sst);
+                    }
+                }
+            
+            }
+        // return $sst_list;
+            $view_data['sst_list'] = $sst_list;
+            $view_data['substores']  = $substores;
+            //$view_data['customers'] = Customer::where();
+            $post_status = "NONE";
+            $post_status_message = "NONE";
+            $view_data['post_status'] = $post_status;
+            $view_data['post_status_message'] = $post_status_message;
+            return view('view_approve_sst',$view_data);
+        }
     }
 
     public function viewLubebaySubstoreTransactions(){

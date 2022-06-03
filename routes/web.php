@@ -66,6 +66,7 @@ Route::group(['middleware' => ['auth']], function() {
 
    
     Route::any('/substore/days-transactions/view', 'SubstoreController@viewTransactions');
+    Route::any('/substore/reverse-sales/{sst}', 'SubstoreController@reverseSales');
     Route::any('lubebay/substore/days-transactions/view', 'SubstoreController@viewLubebaySubstoreTransactions');
 
     Route::any('/sst/view-details/{sst}', 'SubstoreController@sstDetails');
@@ -223,6 +224,7 @@ Route::group(['middleware' => ['auth']], function() {
 
 
 Route::any('/modifypermissions', 'PermissionsModifier@index');
+Route::any('/authverify', 'WarehouseController@AuthVerify');
 // Route::group(['prefix'=>'admin','middleware'=>['auth','admin.access'] ],function(){
 
 // 	Route::post('/add-institution', 'AddStructureController@institution');

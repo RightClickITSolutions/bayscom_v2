@@ -316,4 +316,9 @@ class WarehouseController extends Controller
         }
 
     }
+
+    public function AuthVerify()
+    {
+        return Auth::user()->accessibleEntities();
+    }
 }

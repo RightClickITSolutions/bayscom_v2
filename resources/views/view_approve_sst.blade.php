@@ -59,6 +59,9 @@
                                                   <th>
                                                     Confirmation
                                                   </th>
+                                                  <th>
+                                                    Action
+                                                  </th>
                                                 </thead>
                                                 <tbody>
                                                     @foreach($sst_list as $sst)
@@ -98,8 +101,9 @@
                                                     @endif
                                                           
                                                     </td>
-                                                    
-                                                    
+                                                    <td>
+                                                      <a href="{{url('/substore/reverse-sales/'.$sst->id)}}">Reverse Sales</a>
+                                                    </td>
                                                   </tr>
                                                   @endforeach
                                                 </tbody>
