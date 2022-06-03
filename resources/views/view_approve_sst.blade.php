@@ -18,7 +18,17 @@
       @endsection
       <!-- End Navbar -->
       @section('content')
-      @include('includes.post_status')     
+      @include('includes.post_status')    
+      @if (session()->has('status'))
+          <script type="application/javascript">
+              Swal.fire({
+                  icon: 'success',
+                  // title: 'Oops...',
+                  text: 'Lodgement Reverse successfully.',
+                  // footer: '<a href="">Why do I have this issue?</a>'
+              })
+          </script>
+      @endif 
       <div class="col s12">
                 <div class="container">
                     <div class="section section-data-tables">

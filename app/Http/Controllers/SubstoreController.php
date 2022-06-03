@@ -614,11 +614,14 @@ class SubstoreController extends Controller
         return view('view_approve_sst',$view_data);
     }
 
-    public function reverseSales($sst_id)
+    public function reverseSales($sst_id, Request $request)
     {
         $delete_transaction = SubstoreTransaction::where('id', $sst_id)->delete();
         if ($delete_transaction) {
+            $request->session()->flash('status', 'Lodgement Reverse successfully.');
             return redirect('lubebay/substore/days-transactions/view');
+        }else{
+            $request->session()->flash('status', 'Lodgement Reverse not successfully.');
         }
     }
 
