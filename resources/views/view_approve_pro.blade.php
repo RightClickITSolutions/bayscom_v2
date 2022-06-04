@@ -33,6 +33,16 @@
                             })
                         </script>
                     @endif
+                     @if (session()->has('status_error'))
+                        <script type="application/javascript">
+                            Swal.fire({
+                                icon: 'success',
+                                // title: 'Oops...',
+                                text: 'PRO Reversal Not Successfully!!!',
+                                // footer: '<a href="">Why do I have this issue?</a>'
+                            })
+                        </script>
+                    @endif
                     <div class="section section-data-tables">
                         <div class="card">
                             <div class="card-content">
@@ -96,7 +106,7 @@
                                                         </td> -->
                                                         
                                                         <td>
-                                                            &#8358;{{number_format($pro->order_total, 2)}}
+                                                            &#8358;{{$pro->order_total}}
                                                         </td>
                                                         <td>
                                                         {{$pro->createdBy->name}}
@@ -140,7 +150,17 @@
                                                             {{$pro->approval_status}}
                                                         </td>
                                                         <td>
-                                                            <a href="{{url('/pro/reverse_pro/'.$pro->id)}}">Reverse Pro</a>
+                                                            @if ($pro->approval_status == 'INITIATED')
+                                                                <form action="{{url('/pro/reverse_pro/'.$pro->id)}}">
+                                                            
+                                                                    <input type="hidden" value="{{$pro->order_total}}" name="reverse_price">
+                                                                    <input type="hidden" name="transaction_type" value="CREDIT"/>
+                                                                    <input type="submit" class="btn btn-success" value="Reverse Pro">
+                                                                
+                                                                </form>
+                                                            @else
+                                                                <a aria-disabled="disable"nref="#">No Action</a>
+                                                            @endif
                                                         </td>
                                                         </tr>
                                                     @endforeach

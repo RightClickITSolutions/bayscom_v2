@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
+use App\Http\Controllers\Custom\AccountTransactionClass;
 use Illuminate\Validation\ValidationException;
 
 use Illuminate\Http\Request;
@@ -16,6 +17,7 @@ use App\Models\Customer;
 use App\Models\WarehouseInventory;
 use App\Http\Controllers\Custom\CommitOrderTransaction;
 use App\Helpers\PostStatusHelper;
+use App\Models\Account;
 use App\Models\Prf;
 use App\User;
 
@@ -268,26 +270,49 @@ class ProController extends Controller
     }
 
 
-    public function reversePro($pro_id)
+    public function reversePro($pro_id, Request $request)
     {
-        $view_data['pro_reverse'] = Prf::where('id', $pro_id)->get();
+        $account = Account::where('account_name', 'MOFAD_SAGE')->where('account_type','MAIN')->first();
+        $current_pro_amount = $request->input('reverse_price');
+        $new_current_balance = $current_pro_amount + $account->balance;
 
-        return view('pro_prompt_delete', $view_data);
+        $new_account = Account::where('account_name', 'MOFAD_SAGE')->where('account_type', 'MAIN')->update([
+            'balance' => $new_current_balance,
+        ]);
 
-    }
+        if ($new_account) { 
 
-    public function instReversePro($pro_id, Request $request)
-    {
-        $pro_reverse = Prf::where('id', $pro_id)->delete();
+            $account_transaction = new AccountTransactionClass;
+            $account_transaction_id = $account_transaction->new_transaction(
+                $account->id,
+                $related_process="ADMIN_POST",
+                $related_process_id=null,
+                $transaction_type=$request->input('transaction_type'),
+                $transaction_amount=$current_pro_amount,
+                $payment_comment="PRO Reversal",
+                $bank_reference="",
+                $approved=true);
+            if ($account_transaction_id) {
 
-        if ($pro_reverse) {
-            $request->session()->flash('status', 'PRO Reversed Successfully!!!');
-            redirect('/view-pro');
-        }else{
-            $request->session()->flash('status', 'PRO Reversal Unsuccessful!!!');
-            redirect('/view-pro');
+                $reverse_pro = Pro::where('id', $pro_id)->delete();
+
+                if ($reverse_pro) {
+                    $request->session()->flash('status', 'PRO Reverse successfully.');
+                    return redirect('/view-pro');
+                }else{
+                    $request->session()->flash('status_error', 'PRO Reverse not successfully.');
+                    return redirect('/view-pro');
+                }
+                
+            }
         }
 
-
     }
+
+    // public function instReversePro($pro_id, Request $request)
+    // {
+    //     $current_pro_amount = $request->input('reverse_price');
+    //     return $current_pro_amount . " " .$pro_id;
+
+    // }
 }
