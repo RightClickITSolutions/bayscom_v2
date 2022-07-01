@@ -150,7 +150,7 @@
                                                             {{$pro->approval_status}}
                                                         </td>
                                                         <td>
-                                                            @if ($pro->approval_status == 'INITIATED')
+                                                            @if ($pro->approval_status == 'APPROVED_COLLECTED' || $pro->approval_status == 'APPROVED_NOT_COLLECTED')
                                                                 <form action="{{url('/pro/reverse_pro/'.$pro->id)}}">
                                                             
                                                                     <input type="hidden" value="{{$pro->order_total}}" name="reverse_price">

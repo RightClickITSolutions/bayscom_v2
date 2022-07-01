@@ -206,16 +206,20 @@ class AccountsController extends Controller
             if($request->input('transaction_type')=='CREDIT'){
                 $request->validate([
                     'credit_amount' => 'required|numeric',
-                    'transaction_type' => 'required|in:CREDIT,DEBIT|string' 
+                    'transaction_type' => 'required|in:CREDIT,DEBIT|string' ,
+                    'bank_reference' => 'required'
                 ]);
                 $amount = $request->input('credit_amount');
+                $transaction_comment = $request->input('bank_reference');
             }
             elseif($request->input('transaction_type')=='DEBIT'){
                 $request->validate([
                     'debit_amount' => 'required|numeric',
-                    'transaction_type' => 'required|in:CREDIT,DEBIT|string' 
+                    'transaction_type' => 'required|in:CREDIT,DEBIT|string',
+                    'bank_reference' => 'required' 
                 ]);
                 $amount = $request->input('debit_amount');
+                $transaction_comment = $request->input('bank_reference');
             }
             else{
                 $request->validate([
@@ -230,7 +234,7 @@ class AccountsController extends Controller
                 $related_process_id=null,
                 $transaction_type=$request->input('transaction_type'),
                 $transaction_amount=$amount,
-                $payment_comment="",
+                $payment_comment=$transaction_comment,
                 $bank_reference=$request->input('bank_reference',''),
                 $approved=true);
                 

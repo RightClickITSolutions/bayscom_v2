@@ -8,13 +8,14 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^7.2",
+        "php": "^7.3",
         "alt-three/locker": "6.4",
         "barryvdh/laravel-snappy": "^1.0",
         "fideloper/proxy": "^4.0",
         "laravel/framework": "^6.2",
         "laravel/tinker": "^2.0",
         "maatwebsite/excel": "^3.1",
+        "phpoffice/phpspreadsheet": "^1.23",
         "realrashid/sweet-alert": "^5.0",
         "spatie/laravel-permission": "^3.3",
         "yajra/laravel-datatables-buttons": "^4.13",
@@ -29,6 +30,9 @@
         "phpunit/phpunit": "^8.0"
     },
     "config": {
+        "platform": {
+            "php": "7.3"
+         },
         "optimize-autoloader": true,
         "preferred-install": "dist",
         "sort-packages": true

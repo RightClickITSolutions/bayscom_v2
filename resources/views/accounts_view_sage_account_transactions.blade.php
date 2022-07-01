@@ -56,6 +56,9 @@
                                                       Balance
                                                     </th>
                                                     <th>
+                                                      Comment
+                                                    </th>
+                                                    <th>
                                                       Date
                                                     </th>
                                                   </thead>
@@ -84,6 +87,9 @@
                                                       
                                                       <td>
                                                       {{number_format($transaction->balance,2)}}
+                                                      </td>
+                                                      <td>
+                                                        {{ $transaction->comment }}
                                                       </td>
                                                       <td>
                                                           {{$transaction->created_at}}
