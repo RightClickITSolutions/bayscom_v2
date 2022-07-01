@@ -7,7 +7,7 @@
                     <a href="www.rightclicksolutions.com" target="_blank">RightClick </a> All rights reserved.
                 </span>
                 <span
-                    class="right hide-on-small-only"> <a href="">BAYSCOM</a>
+                    class="right hide-on-small-only"> <a href="">BAYSCOM 2022</a>
                 </span>
             </div>
         </div>
