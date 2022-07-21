@@ -301,4 +301,9 @@ class CustomerController extends Controller
             return redirect('/customer/lodgement/confirmation');
         }
     }
+
+    public function lodgementCreate()
+    {
+        
+    }
 }

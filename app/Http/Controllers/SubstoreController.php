@@ -442,10 +442,6 @@ class SubstoreController extends Controller
         
         return view('admin_reverse_sst',$view_data);
 
-
-
-
-
     }
 
    
@@ -645,7 +641,7 @@ class SubstoreController extends Controller
         $post_status_message = "NONE";
         $view_data['post_status'] = $post_status;
         $view_data['post_status_message'] = $post_status_message;
-        return view('view_approve_sst',$view_data);
+        return view('admin_reverse_sst',$view_data);
         // return $view_data['sst_list'];
     }
 
@@ -669,7 +665,7 @@ class SubstoreController extends Controller
         $post_status_message = "NONE";
         $view_data['post_status'] = $post_status;
         $view_data['post_status_message'] = $post_status_message;
-        return view('view_approve_sst',$view_data);
+        return view('admin_reverse_sst',$view_data);
     }
 
     public function sstDetails(SubstoreTransaction $sst){

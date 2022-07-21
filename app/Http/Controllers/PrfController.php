@@ -205,19 +205,17 @@ class PrfController extends Controller
 
     public function view(Request $request)
     {
-         //debug
+        //debug
         //$prfs = Prf::find(2);
         if (  $request->session()->get('post_status') ) {
             $view_data['post_status'] = $request->session()->get('post_status');
             $view_data['post_status_message'] = $request->session()->get('post_status_message');
              
         }
-        $prf_list = Prf::withTrashed()->whereIn('warehouse_id',json_decode(Auth::user()->accessibleEntities()->warehouses))->where('approval_status', 'INITIATED')->get();
+        $prf_list = Prf::all();
         $view_data['prf_list'] = $prf_list;
-        //debug
-        //return $prf->createdBy;
-        return view('view_approve_prf',$view_data);
-        // return $view_data['prf_list'];
+        
+        return view('admin_reverse_prf',$view_data);
     }
 
     public function prfPayment(Request $request, Prf $prf){
@@ -366,15 +364,30 @@ class PrfController extends Controller
         $commit_order_transactions = New CommitOrderTransaction;
         $post_status =  New PostStatusHelper;
         if($commit_order_transactions->prfStockCollectionReversal($prf->id)){
+
             $post_status->success();
         }
         else{
             $post_status->failed();
         }
-        $view_data['post_status'] = $post_status->post_status;
-        $view_data['post_status_message'] = $post_status->post_status_message;
+        $delete_prf  = Prf::withTrashed()->where('id', $prf->id)->whereIn('warehouse_id',json_decode(Auth::user()->accessibleEntities()->warehouses))->delete();
 
-        return view('admin_reverse_prf',$view_data);
+        if ($delete_prf) {
+
+            $view_data['post_status'] = $post_status->post_status;
+            $view_data['post_status_message'] = $post_status->post_status_message;
+            $request->session()->flash('deleted', '');
+            $request->session()->flash('delete_row', '');
+            return redirect('/view-prf');
+
+        }else {
+
+            $view_data['post_status'] = $post_status->post_status;
+            $view_data['post_status_message'] = $post_status->post_status_message;
+            $request->session()->flash('not-deleted', '');
+            return redirect('/view-prf');
+
+        }
 
     }
 
