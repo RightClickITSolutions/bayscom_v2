@@ -235,3 +235,4 @@ Route::any('/authverify', 'WarehouseController@AuthVerify');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/homehme', 'HomeController@indexhome')->name('homehome');
