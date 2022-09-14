@@ -372,6 +372,36 @@ class="sidenav-main nav-expanded nav-lock nav-collapsible sidenav-dark side-nav-
             </div>
         </li>
     @endcan
+    <!--REports-->
+    @can('view_general_expenses')
+        <li class="bold"><a class="collapsible-header waves-effect waves-cyan "
+                href="JavaScript:void(0)"><i class="material-icons">fast_forward</i><span class="menu-title"
+                    data-i18n="Menu levels">Reports</span></a>
+            <div class="collapsible-body">
+                <ul class="collapsible collapsible-sub" data-collapsible="accordion">
+                    @can('add_general_expenses')
+                        <li><a href="{{ url('/expense/add-expense') }}"><i
+                                    class="material-icons">radio_button_unchecked</i><span data-i18n="Second level">Add
+                                    Customers</span></a>
+                        </li>
+                    @endcan
+                    <li><a href="{{ url('/expense/view-expenses') }}"><i
+                                class="material-icons">radio_button_unchecked</i><span
+                                data-i18n="Second level">Sales</span></a>
+                    </li>
+                    <li><a href="{{ url('/expense/view-expenses') }}"><i
+                        class="material-icons">radio_button_unchecked</i><span
+                        data-i18n="Second level">Products</span></a>
+                    </li>
+                    <li><a href="{{ url('/expense/view-expenses') }}"><i
+                        class="material-icons">radio_button_unchecked</i><span
+                        data-i18n="Second level">Sub Stores</span></a>
+                    </li>
+
+                </ul>
+            </div>
+        </li>
+    @endcan
 
     {{-- <!-- Lubebay Expenses -->
     @can('view_lubebay_expenses')

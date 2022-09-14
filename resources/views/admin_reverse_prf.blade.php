@@ -106,7 +106,7 @@
                                                   </td>
                                                   
                                                   <td>
-                                                  {{number_format($prf->order_total,2)}}
+                                                    &#8358;{{number_format($prf->order_total,2)}}
                                                   </td>
                                                   <td>
                                                   {{$prf->customer->name?? 'N/A'}}

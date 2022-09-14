@@ -69,7 +69,7 @@
                     <div class="row">
                         <div class="input-field ">
                             
-                            <label class="bmd-label-floating">Credit Amount</label>
+                            <label class="bmd-label-floating">Debit Amount</label>
                             <input type="number" min="0"  step="0.01" value="{{old('debit_amount')}}"  name="debit_amount" class="form-control">
                             <input type="hidden" name="transaction_type" value="DEBIT"/>
                         </div>
@@ -79,7 +79,7 @@
                         <div class="input-field  ">
                             
                             
-                            <textarea id="icon_prefix2" class="materialize-textarea" name="description" ></textarea>
+                            <textarea id="icon_prefix2" class="materialize-textarea" name="bank_reference" ></textarea>
                             <label for="icon_prefix2">comment/Description</label>
                             
                         </div>

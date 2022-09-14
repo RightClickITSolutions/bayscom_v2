@@ -106,7 +106,7 @@
                                                         </td> -->
                                                         
                                                         <td>
-                                                            &#8358;{{$pro->order_total}}
+                                                            &#8358;{{number_format($pro->order_total)}}
                                                         </td>
                                                         <td>
                                                         {{$pro->createdBy->name}}
